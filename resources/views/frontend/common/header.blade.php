@@ -124,13 +124,25 @@
                <div class="col-7 col-md-3 order-2 order-lg-3">
                   <div class="header-action">
                      <!-- header right action -->
-                     <ul>
+                     <ul class="align-items-sm-center">
                         <li>
                            <a href="#"> <i class="bi bi-search"></i></a>
                         </li>
-                        <li>
-                           <a href="{{ route('login') }}"> <i class="bi bi-person"></i></a>
-                        </li>
+                       
+                           @if(Auth::check())
+                              <li>
+                                 <a href="{{ route('account') }}"> <i class="bi bi-person"></i></a>
+                              </li>
+                              <li>
+                                 <a class="btn btn-primary-stroke login-btn head-btn" href="{{ route('signout') }}"> Logout</a>
+                              </li>
+                           @else
+                              <li>
+                                 <a class="btn btn-primary-stroke login-btn head-btn" href="{{ route('signin') }}"> Login</a>
+                              </li>
+                           @endif
+                           
+                        
                         <li>
                            <a href="#"> <i class="bi bi-globe"></i></a>
                         </li>
