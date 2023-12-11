@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -32,7 +33,10 @@ Route::post('/store-register', [CustomAuthController::class, 'postRegister'])->n
 Route::get('/signin', [CustomAuthController::class, 'index'])->name('signin');
 Route::post('/customLogin', [CustomAuthController::class, 'customLogin'])->name('customLogin');
 
-
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 Route::group(['middleware' => ['auth','web']], function () {
