@@ -1,0 +1,41 @@
+
+.btn{
+
+    &.btn-primary-fill{
+         background-color: $color_white;
+         padding: 18px 15px 18px 18px;
+         border-radius: 0;
+         font-size: 16px;
+         
+
+         span{
+          padding-right: 130px;
+          @media (max-width: 575.98px) {        padding-right: 30px; }
+         }
+    }
+
+    &.btn-primary-stroke{
+        background-color: transparent;
+        padding: 18px 15px 18px 18px;
+        border-radius: 0;
+        font-size: 16px;
+        color: $color_white;
+        border: 1px solid $color_black;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: fit-content;
+
+        span{
+         padding-right: 80px;
+         color: $color_black;
+         @media (max-width: 575.98px) {        padding-right: 30px; }
+        }
+   }
+}
+
+
+
+
+
