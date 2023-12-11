@@ -1,5 +1,7 @@
-  <!-- my account section -->
-  <section class="my-account-section">
+@extends('layouts.app.main')
+@section('content')
+    <!-- my account section -->
+    <section class="my-account-section">
         <div class="container">
             <h3 class="my-account-page-title mb-4">My Account</h3>
             <div class="account-header-section">
@@ -89,3 +91,5 @@
             </div>
         </div>
     </section>
+
+@endsection

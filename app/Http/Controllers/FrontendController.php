@@ -218,18 +218,8 @@ class FrontendController extends Controller
         $blog = Blogs::where('status',1)->where('slug',$slug)->first();
         return view('frontend.blog_details', compact('blog'));
     }    
-    public function userlogin()
-    {
-        return view('frontend.userlogin'); 
-    }
-    public function checklogin()
-    {
-        return view('frontend.checklogin'); 
-    }
-    public function register()
-    {
-        return view('frontend.register'); 
-    }
+    
+    
     public function storeRegister(Request $request){
         $con                = new User();
         $con->email         = $request->email;
@@ -289,5 +279,9 @@ class FrontendController extends Controller
       
     }
 
+    public function account()
+    {
+        return view('frontend.account'); 
+    }
 
 }

@@ -315,3 +315,7 @@
 .profile-info .row:not(:last-child) {
     margin-bottom: 25px;
 }
+
+.head-btn{
+    padding: 5px 10px 5px !important;
+}
