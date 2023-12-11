@@ -19,14 +19,20 @@ use Illuminate\Support\Facades\Storage;
 
 class PagesController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
-         
+        $this->middleware('permission:enquiries', ['only' => ['enquiries']]);
 
-         $this->middleware('permission:enquiries', ['only' => ['enquiries']]);
-
-         $this->middleware('permission:general_settings', ['only' => ['generalSettings']]);
+        $this->middleware('permission:general_settings', ['only' => ['generalSettings']]);
+        $this->middleware(function ($request, $next) {
+            if(Auth()->user()->user_type === 1){
+                return $next($request);
+            }else{
+                return redirect()->route('account');
+            }
+        });
     }
+
     
     public function homePage()
     {
