@@ -12,6 +12,16 @@ use Illuminate\Validation\Rules\File;
 
 class ServicesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if(Auth()->user()->user_type === 1){
+                return $next($request);
+            }else{
+                return redirect()->route('account');
+            }
+        });
+    }
    /**
      * Display a listing of the resource.
      */
@@ -80,9 +90,9 @@ class ServicesController extends Controller
                     ];
                 
             }
-            // if(!empty($s1_datas)){
-            //     Serviceslist::insert($s1_datas);
-            // }
+            if(!empty($s1_datas)){
+                Serviceslist::insert($s1_datas);
+            }
         }
 
         
@@ -104,18 +114,18 @@ class ServicesController extends Controller
     public function edit(Services $service)
     { 
         $s1_data = [];
-       // $s1_sub = Serviceslist::where('service_id', $service->id)->get();
-       $s1_sub = Services::with(['service_details'])->find($service->id);
-       if(!empty($s1_sub->service_details)){
-        foreach ($s1_sub->service_details as $ss) {
-            $arr = [];            
-            
-                $arr['name'] = $ss->name;
-                $arr['description'] = $ss->description;
-                $arr['position'] = $ss->position;
-                $arr['sort_order'] = $ss->sort_order;
-                $s1_data[] = $arr;
-        }
+        // $s1_sub = Serviceslist::where('service_id', $service->id)->get();
+        $s1_sub = Services::with(['service_details'])->find($service->id);
+        if(!empty($s1_sub->service_details)){
+            foreach ($s1_sub->service_details as $ss) {
+                $arr = [];            
+                
+                    $arr['name'] = $ss->name;
+                    $arr['description'] = $ss->description;
+                    $arr['position'] = $ss->position;
+                    $arr['sort_order'] = $ss->sort_order;
+                    $s1_data[] = $arr;
+            }
         }
 
         $s1Data = json_encode($s1_data);
@@ -160,33 +170,24 @@ class ServicesController extends Controller
         $service->save();
         $id = $service->id;
 
-        if ($request->s1_data && $id) {
-            foreach ($request->s1_data as $s1_data) {
-                
-                        if($s1_data['s1_id'] != '' && $s1_data['s1_id'] != 0){
-                        
-                        
-                        if(isset($s1Array[$s1_data['s1_id']])){
-                            $oldContentDate = $s1Array[$s1_data['s1_id']]['content_date'] ?? NULL;
-                            $oldContent =  $s1Array[$s1_data['s1_id']]['content'] ?? NULL;                                                     
-                        }
-                        
-                        Serviceslist::where('id', $s1_data['s1_id'])->update([
-                                                            'name' => 's1', 
-                                                            'description' => $content_date,
-                                                            'position' => $content,
-                                                            'sort_order' => Auth::user()->id
-                                                        ]);
-                    }else{
-                        $detailsS1Sub[] = [
-                            'sopc_id' => $id,
-                            'type' => 's1', 
-                            'content_date' => $content_date,
-                            'content' => $content,
-                            'created_by' => Auth::user()->id
-                        ];
-                    }
-                
+        Serviceslist::where('service_id', $id)->delete();
+
+        if($request->has('s1_data')){
+            $list = $request->s1_data;
+            $listData = array();
+            foreach($list as $add){
+                if($add['name'] != ''){
+                    $listData[] = [
+                        'service_id' => $id,
+                        'name' => $add['name'], 
+                        'description' => $add['description'],
+                        'position' => $add['position'],
+                        'sort_order' => $add['sort_order']
+                    ];
+                }
+            }
+            if(!empty($listData)){
+                Serviceslist::insert($listData);
             }
         }
 
@@ -198,15 +199,12 @@ class ServicesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Services $services)
+    public function destroy(Services $service)
     {
-        $img = $services->image;
-        if ($services->delete()) {
+        $img = $service->image;
+        $dimg = $service->detailspage_image;
+        if ($service->delete()) {
             deleteImage($img);
-        }
-
-        $dimg = $services->detailspage_image;
-        if ($services->delete()) {
             deleteImage($dimg);
         }
 

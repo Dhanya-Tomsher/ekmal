@@ -16,10 +16,19 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
+
+     public function __construct()
     {
-         $this->middleware('permission:roles', ['only' => ['index','store']]);
+        $this->middleware('permission:roles', ['only' => ['index','store']]);
+        $this->middleware(function ($request, $next) {
+            if(Auth()->user()->user_type === 1){
+                return $next($request);
+            }else{
+                return redirect()->route('account');
+            }
+        });
     }
+   
 
     public function index(Request $request)
     {

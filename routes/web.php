@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -16,16 +18,36 @@ Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/service/{slug}', [FrontendController::class, 'serviceDetails'])->name('service-details');
 Route::get('/search-blog', [FrontendController::class, 'searchBlog'])->name('search-blog');
-Route::get('/register', [FrontendController::class, 'register'])->name('register');
-Route::get('/userlogin', [FrontendController::class, 'userlogin'])->name('userlogin');
-Route::post('/checklogin', [FrontendController::class, 'checklogin'])->name('checklogin');
-Route::get('/account', [FrontendController::class, 'account'])->name('account');
+// Route::get('/edit-profile', [FrontendController::class, 'editProfile'])->name('edit-profile');
+
+
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/store-contact', [FrontendController::class, 'storeContact'])->name('store-contact');
 Route::post('/store-serviceenquiry', [FrontendController::class, 'storeServiceenquiry'])->name('store-serviceenquiry');
-Route::post('/store-register', [FrontendController::class, 'storeRegister'])->name('store-register');
-
 Route::get('/course-apply/{slug}', [FrontendController::class, 'courseApply'])->name('course-apply');
 Route::post('/apply-course', [FrontendController::class, 'storeCourseApply'])->name('apply-course');
+
+
+Route::get('/signup', [CustomAuthController::class, 'register'])->name('signup');
+Route::post('/store-register', [CustomAuthController::class, 'postRegister'])->name('store-register');
+Route::get('/signin', [CustomAuthController::class, 'index'])->name('signin');
+Route::post('/customLogin', [CustomAuthController::class, 'customLogin'])->name('customLogin');
+
+Route::get('/edit-profile', [CustomAuthController::class, 'editProfile'])->name('edit-profile');
+Route::post('/store-registerupdate', [CustomAuthController::class, 'postRegisterupdate'])->name('store-registerupdate');
+
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+
+Route::group(['middleware' => ['auth','web']], function () {
+
+    Route::get('/account', [FrontendController::class, 'account'])->name('account');
+
+    Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
+});
 
 include_once('admin.php');

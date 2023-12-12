@@ -185,12 +185,6 @@ $('#img').on('change', function() {
                 var repeatCount = repeaterItems.length;
                 var cnt = parseInt(repeatCount) - 1;
 
-                $('[name="s1_data['+cnt+'][content]"]').attr("id","addDesc_"+count);
-                
-
-                tinymce.init({
-                    selector : "#addDesc_"+count
-                });
                 count = parseInt(count) + 1;
             },
             hide: function(deleteElement) {

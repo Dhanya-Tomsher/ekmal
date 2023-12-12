@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Blogs;
 use App\Models\Faq;
 use App\Models\User;
+use App\Models\Usercourses;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Pages;
@@ -33,6 +34,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use App\Mail\ContactEnquiry;
 use App\Models\Contactdetails;
 use App\Models\Dynamiccontents;
+use App\Models\Serviceslist;
 use Illuminate\Support\Facades\URL;
 #use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Storage;
@@ -133,6 +135,18 @@ class FrontendController extends Controller
         $course = Course::where('status',1)->where('slug',$slug)->first();
         return view('frontend.course_details', compact('course'));
     }
+    public function courseApply(Request $request)
+    {
+        $slug = $request->slug;
+        $course = Course::where('status',1)->where('slug',$slug)->first();
+        $user = Auth()->user();
+        $usercourse                 = new Usercourses();
+        $usercourse->user_id        = $user->id;
+        $usercourse->course_id      = $course->id;
+        $usercourse->status         = 1;
+        $usercourse->save();
+        return view('frontend.account');
+    }
     public function searchBlog(Request $request){
         $search = '';
         if($request->has('keyword')){
@@ -218,18 +232,8 @@ class FrontendController extends Controller
         $blog = Blogs::where('status',1)->where('slug',$slug)->first();
         return view('frontend.blog_details', compact('blog'));
     }    
-    public function userlogin()
-    {
-        return view('frontend.userlogin'); 
-    }
-    public function checklogin()
-    {
-        return view('frontend.checklogin'); 
-    }
-    public function register()
-    {
-        return view('frontend.register'); 
-    }
+    
+    
     public function storeRegister(Request $request){
         $con                = new User();
         $con->email         = $request->email;
@@ -237,11 +241,24 @@ class FrontendController extends Controller
         $con->name          = $request->name;
         $con->password      = Hash::make($request->password);
         $con->user_type     = 0;
+        $con->status        = 1;
         $con->save();
         $user = Auth()->user();
          $banner = Banners::find(11);
-        // $contact = User::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
-        // return view('frontend.contact',compact('banner','contact'));
+        return view('frontend.account',compact('banner'));
+    }
+
+    public function storeRegisterupdate(Request $request){
+        $con                = Blogs::where('id',$request)->where('slug',$slug)->first();
+        $con->email         = $request->email;
+        $con->phone_number  = $request->phone;
+        $con->name          = $request->name;
+        $con->password      = Hash::make($request->password);
+        $con->user_type     = 0;
+        $con->status        = 1;
+        $con->save();
+        $user = Auth()->user();
+         $banner = Banners::find(11);
         return view('frontend.account',compact('banner'));
     }
     public function services()
@@ -257,7 +274,9 @@ class FrontendController extends Controller
         $banner = Banners::find(10);
         $serv = Services::where('status', '=', 1)->get();
         $service = Services::where('status',1)->where('slug',$slug)->first();
-        return view('frontend.service_details', compact('service','banner','serv'));
+        $servicelisttop = Serviceslist::where('service_id', '=', $service->id)->where('position', '=', 1)->where('status', '=', 1)->get();
+        $servicelistbottom = Serviceslist::where('service_id', '=', $service->id)->where('position', '=', 2)->where('status', '=', 1)->get();
+        return view('frontend.service_details', compact('service','banner','serv','servicelisttop','servicelistbottom'));
     }
     public function storeContact(Request $request){
         $con                = new Contact();
@@ -289,5 +308,9 @@ class FrontendController extends Controller
       
     }
 
+    public function account()
+    {
+        return view('frontend.account'); 
+    }
 
 }

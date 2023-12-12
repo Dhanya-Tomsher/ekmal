@@ -11,6 +11,17 @@ use Illuminate\Validation\Rules\File;
 
 class DynamiccontentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if(Auth()->user()->user_type === 1){
+                return $next($request);
+            }else{
+                return redirect()->route('account');
+            }
+        });
+    }
+
    /**
      * Display a listing of the resource.
      */
