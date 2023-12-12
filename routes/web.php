@@ -18,7 +18,7 @@ Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/service/{slug}', [FrontendController::class, 'serviceDetails'])->name('service-details');
 Route::get('/search-blog', [FrontendController::class, 'searchBlog'])->name('search-blog');
-Route::get('/edit-profile', [FrontendController::class, 'editProfile'])->name('edit-profile');
+// Route::get('/edit-profile', [FrontendController::class, 'editProfile'])->name('edit-profile');
 
 
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
@@ -32,6 +32,10 @@ Route::get('/signup', [CustomAuthController::class, 'register'])->name('signup')
 Route::post('/store-register', [CustomAuthController::class, 'postRegister'])->name('store-register');
 Route::get('/signin', [CustomAuthController::class, 'index'])->name('signin');
 Route::post('/customLogin', [CustomAuthController::class, 'customLogin'])->name('customLogin');
+
+Route::get('/edit-profile', [CustomAuthController::class, 'editProfile'])->name('edit-profile');
+Route::post('/store-registerupdate', [CustomAuthController::class, 'postRegisterupdate'])->name('store-registerupdate');
+
 
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 

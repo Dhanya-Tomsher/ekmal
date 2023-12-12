@@ -56,7 +56,34 @@ class CustomAuthController extends Controller
     {
         return view('frontend.register'); 
     }
+    public function postRegisterupdate(Request $request)
+    {  
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'new_password' => 'required|min:6',
+            'confirm_password' => 'required|min:6|same:new_password',
+        ],[
+            '*.required' => 'This field is required'
+        ]);
+        $user = Auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->password;
+        $user->password = $request->phone;
+        $user->status = 1;
 
+        $details = [
+            'name' => $request->name,
+            'subject' => 'Hi !',
+            'body' => " <p> You have successfully updated your profile in ".env('APP_NAME')."</p><br>"
+        ];
+
+        Mail::to($request->email)->queue(new \App\Mail\SendMail($details));
+        Auth::login($user);
+        return redirect()->route('account');
+    }
     public function postRegister(Request $request)
     {  
         $request->validate([
@@ -91,6 +118,11 @@ class CustomAuthController extends Controller
     }
 
  
+    public function editProfile()
+    {
+        $user = Auth()->user();
+        return view('frontend.edit-profile', compact('user'));
+    }
     public function signOut() {
         Session::flush();
         Auth::logout();

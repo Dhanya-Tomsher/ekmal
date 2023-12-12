@@ -34,6 +34,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use App\Mail\ContactEnquiry;
 use App\Models\Contactdetails;
 use App\Models\Dynamiccontents;
+use App\Models\Serviceslist;
 use Illuminate\Support\Facades\URL;
 #use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Storage;
@@ -244,8 +245,20 @@ class FrontendController extends Controller
         $con->save();
         $user = Auth()->user();
          $banner = Banners::find(11);
-        // $contact = User::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
-        // return view('frontend.contact',compact('banner','contact'));
+        return view('frontend.account',compact('banner'));
+    }
+
+    public function storeRegisterupdate(Request $request){
+        $con                = Blogs::where('id',$request)->where('slug',$slug)->first();
+        $con->email         = $request->email;
+        $con->phone_number  = $request->phone;
+        $con->name          = $request->name;
+        $con->password      = Hash::make($request->password);
+        $con->user_type     = 0;
+        $con->status        = 1;
+        $con->save();
+        $user = Auth()->user();
+         $banner = Banners::find(11);
         return view('frontend.account',compact('banner'));
     }
     public function services()
@@ -261,7 +274,9 @@ class FrontendController extends Controller
         $banner = Banners::find(10);
         $serv = Services::where('status', '=', 1)->get();
         $service = Services::where('status',1)->where('slug',$slug)->first();
-        return view('frontend.service_details', compact('service','banner','serv'));
+        $servicelisttop = Serviceslist::where('service_id', '=', $service->id)->where('position', '=', 1)->where('status', '=', 1)->get();
+        $servicelistbottom = Serviceslist::where('service_id', '=', $service->id)->where('position', '=', 2)->where('status', '=', 1)->get();
+        return view('frontend.service_details', compact('service','banner','serv','servicelisttop','servicelistbottom'));
     }
     public function storeContact(Request $request){
         $con                = new Contact();
