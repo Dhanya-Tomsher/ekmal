@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Blogs;
 use App\Models\Faq;
 use App\Models\User;
+use App\Models\Usercourses;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Pages;
@@ -133,6 +134,18 @@ class FrontendController extends Controller
         $course = Course::where('status',1)->where('slug',$slug)->first();
         return view('frontend.course_details', compact('course'));
     }
+    public function courseApply(Request $request)
+    {
+        $slug = $request->slug;
+        $course = Course::where('status',1)->where('slug',$slug)->first();
+        $user = Auth()->user();
+        $usercourse                 = new Usercourses();
+        $usercourse->user_id        = $user->id;
+        $usercourse->course_id      = $course->id;
+        $usercourse->status         = 1;
+        $usercourse->save();
+        return view('frontend.account');
+    }
     public function searchBlog(Request $request){
         $search = '';
         if($request->has('keyword')){
@@ -227,6 +240,7 @@ class FrontendController extends Controller
         $con->name          = $request->name;
         $con->password      = Hash::make($request->password);
         $con->user_type     = 0;
+        $con->status        = 1;
         $con->save();
         $user = Auth()->user();
          $banner = Banners::find(11);

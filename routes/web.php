@@ -17,7 +17,7 @@ Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/service/{slug}', [FrontendController::class, 'serviceDetails'])->name('service-details');
 Route::get('/search-blog', [FrontendController::class, 'searchBlog'])->name('search-blog');
-
+Route::get('/edit-profile', [FrontendController::class, 'editProfile'])->name('edit-profile');
 
 
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
