@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class CustomAuthController extends Controller
 {
@@ -77,6 +78,14 @@ class CustomAuthController extends Controller
             'status' => 1,
         ]);
 
+        $details = [
+            'name' => $request->name,
+            'subject' => 'Welcome to '.env('APP_NAME').'!',
+            'body' => " <p> We are thrilled to welcome you to ".env('APP_NAME')."</p><br>
+            <p>To start exploring, simply log in to your account using the credentials you provided during registration. If you have any questions or need assistance, please don't hesitate to reach out to our customer support team.</p><br>"
+        ];
+
+        Mail::to($request->email)->queue(new \App\Mail\SendMail($details));
         Auth::login($user);
         return redirect()->route('account');
     }
