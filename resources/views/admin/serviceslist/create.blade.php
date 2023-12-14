@@ -14,7 +14,7 @@
 
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.serviceslists.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.serviceslist.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Service</label>
@@ -33,7 +33,14 @@
                             </div>                            
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Position</label>
-                                <input type="text" name="position" class="form-control" value="{{ old('position') }}">
+                                <select name="position" class="form-control select2-single mb-3">
+                                    <option value="1">
+                                        Top
+                                    </option>
+                                    <option value="2">
+                                        Bottom
+                                    </option>
+                                </select>
                                 <x-input-error name='position' />
                             </div>
                             <div class="form-group">
@@ -57,7 +64,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary mb-0">Submit</button>
-                            <a href="{{ route('admin.serviceslists.index') }}" class="btn btn-info mb-0"> Cancel</a>
+                            <a href="{{ route('admin.serviceslist.index') }}" class="btn btn-info mb-0"> Cancel</a>
                         </form>
                     </div>
                 </div>

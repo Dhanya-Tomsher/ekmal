@@ -20,7 +20,7 @@
                             ]) }}"
                             enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
+                            @method('PATCH') 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
                                 <input type="text" name="name" class="form-control"
@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description</label>
-                                <input type="text" name="description" class="form-control"
+                                <input type="text" id="bannerEditor" name="description" class="form-control"
                                     value="{{ old('name', $service->description) }}" required>
                                 <x-input-error name='description' />
                             </div>
@@ -85,7 +85,11 @@
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="position">Position</label>
-                                                                <input type="text" class="form-control" name="position" value="">
+                                                                <select name="position" class="form-control select2-single mb-3">
+                                                                <option {{ old('position') == '1' ? 'selected' : '' }} value="1">Top</option>
+                                                                <option {{ old('position') == '2' ? 'selected' : '' }} value="2">Bottom</option>
+                                                                </select>
+                                                                <!-- <input type="text" class="form-control" name="position" value=""> -->
                                                             </div> 
 
                                                             <div class="form-group col-sm-6">
@@ -155,7 +159,19 @@
 <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
     <script src="{{ adminAsset('js/jquery.repeater.min.js') }}"></script>
     <script src="{{ adminAsset('js/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#descEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
 
 $('#img').on('change', function() {
             if (this.files[0]) {

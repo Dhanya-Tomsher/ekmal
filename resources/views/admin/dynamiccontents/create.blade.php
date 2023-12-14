@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description</label>
-                                <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                                <input type="text" id="bannerEditor" name="description" class="form-control" value="{{ old('description') }}">
                                 <x-input-error name='description' />
                             </div>
                             <div class="form-group">
@@ -65,13 +65,7 @@
                                 </div>
                                 <x-input-error name='coverimage' />
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Sort Order</label>
-                                <input type="number" name="sort_order" class="form-control"
-                                    value="{{ old('sort_order') }}">
-                                <x-input-error name='sort_order' />
-                            </div>
-
+                            
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Status</label>
                                 <select name="status" class="form-control select2-single mb-3">
@@ -105,7 +99,19 @@
 @push('footer')
     <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
 
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#descEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
         $('#img').on('change', function() {
             if (this.files[0]) {
                 $('#imgname').text(this.files[0].name)

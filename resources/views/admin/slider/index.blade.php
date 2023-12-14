@@ -43,7 +43,7 @@
                                                 <td class="text-center">{{ $key + 1 + ($slider->currentPage() - 1) * $slider->perPage() }}</td>
                                                 <td>{{ $sliders->title }}</td>
                                                 <td class="text-center">
-                                                    <img class="slider-image" src="{{ $sliders->getImage() }}" alt="" width="200">
+                                                    <img class="slider-image" src="{{ $sliders->getCoverimage() }}" alt="" width="200">
                                                 </td>
                                                 <td class="text-center">{{ $sliders->sort_order }}</td>
                                                 <td class="text-center">

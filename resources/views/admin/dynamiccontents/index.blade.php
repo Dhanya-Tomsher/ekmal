@@ -32,7 +32,7 @@
                                         <th scope="col">Page</th>
                                         <th scope="col">Name</th>
                                         <th scope="col" class="text-center">Image</th>
-                                        <th scope="col" class="text-center">Sort Order</th>
+                                        <!-- <th scope="col" class="text-center">Sort Order</th> -->
                                         <th scope="col" class="text-center">Status</th>
                                         <th scope="col" class="text-center">Action</th>
                                     </tr>
@@ -47,7 +47,6 @@
                                                 <td class="text-center">
                                                     <img class="client-image" src="{{ $dynamiccontent->getImage() }}" alt="">
                                                 </td>
-                                                <td class="text-center">{{ $dynamiccontent->sort_order }}</td>
                                                 <td class="text-center">
                                                     <b>{!! $dynamiccontent->status == 1 ? '<span class="text-success">Enabled</span>' : '<span class="text-danger">Disabled</span>' !!}</b>
                                                 </td>

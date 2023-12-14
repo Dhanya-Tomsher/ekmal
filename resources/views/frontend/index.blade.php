@@ -16,14 +16,13 @@
       <section class="featured-section overflow-hidden">
          <div class="container-fluid p-0">
          @if($dyn1)
-         @foreach ($dyn1 as $dyn1s)
             <div class="row align-items-center g-0 featured-start-block">
                               <div class="col-md-6 order-1 order-lg-1">
                   <div class="featured-block-content">
-                     <h3 class="featured-title">{{$dyn1s->title}}</h3>
-                     <p class="featured-description">{{$dyn1s->description}}</p>
-                     <a href="{{ $dyn1s->link }}" class="btn btn-primary-stroke mt-4 mb-5 mb-md-0">
-                        <span> {{ $dyn1s->video_link }}</span> 
+                     <h3 class="featured-title">{{$dyn1->title}}</h3>
+                     <p class="featured-description">{{$dyn1->description}}</p>
+                     <a href="{{ $dyn1->link }}" class="btn btn-primary-stroke mt-4 mb-5 mb-md-0">
+                        <span> {{ $dyn1->video_link }}</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -32,26 +31,24 @@
                </div>
                <div class="col-md-6 order-2 order-lg-2">
                   <div class="featured-img-warpper">
-                     <img src="{{ $dyn1s->image }}" class="img-fluid w-100"  alt="">
+                     <img src="{{ $dyn1->image }}" class="img-fluid w-100"  alt="">
                   </div>
                </div>
             </div>
-            @endforeach
             @endif
             @if($dyn2)
-         @foreach ($dyn2 as $dyn2s)
             <div class="row align-items-center g-0 featured-end-block">
                <div class="col-md-6 order-2 order-md-1">
                   <div class="featured-img-warpper">
-                     <img src="{{ $dyn2s->image }}" class="img-fluid w-100"  alt="">
+                     <img src="{{ $dyn2->image }}" class="img-fluid w-100"  alt="">
                   </div>
                </div>
                <div class="col-md-6 order-1 order-md-2">
                   <div class="featured-block-content p-3 p-md-5">
-                     <h3 class="featured-title">{{$dyn2s->title}}</h3>
-                     <p class="featured-description">{{$dyn2s->description}}</p>
+                     <h3 class="featured-title">{{$dyn2->title}}</h3>
+                     <p class="featured-description">{{$dyn2->description}}</p>
                      <a href="#" class="btn btn-primary-stroke mt-4">
-                        <span> {{ $dyn2s->video_link }}</span> 
+                        <span> {{ $dyn2->video_link }}</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -60,7 +57,6 @@
                </div>
 
             </div>
-            @endforeach
             @endif
          </div>
       </section>
@@ -120,20 +116,18 @@
          <div class="container-fluid">
             <div class="row justify-content-center align-items-start">
             @if($dyn3)
-         @foreach ($dyn3 as $dyn3s)
                <div class="col-md-5">
                   <div class="video-description">                  
-            <h4>{{ $dyn3s->title }}</h4>
-            {{ $dyn3s->description }}            
+            <h4>{{ $dyn3->title }}</h4>
+            {!! $dyn3->description !!}            
                   </div>
                </div>
                <div class="col-md-7">
                   <div class="video-block-content">
-                     <video src="{{ $dyn3s->video_link }}" width="100%" loop muted autoplay type="video/mp4">
+                     <video src="{{ $dyn3->video_link }}" width="100%" loop muted autoplay type="video/mp4">
                      </video>
                   </div>
                </div>
-               @endforeach
                         @endif
             </div>
          </div>
@@ -145,32 +139,28 @@
             <div class="container-fluid">
                  <div class="row">
                  @if($dyn4)
-         @foreach ($dyn4 as $dyn4s)
                   <div class="col-12 col-md-6 chart-upper-block">
-                     <h3>{{ $dyn4s->title }} </h3>
-                     <p>{{ $dyn4s->description }}</p>
-                     <a href="{{ $dyn4s->video_link }}" class="btn btn-primary-stroke">
-                        <span> {{ $dyn4s->link }}</span> 
+                     <h3>{{ $dyn4->title }} </h3>
+                     {{ $dyn4->description }}
+                     <a href="{{ $dyn4->video_link }}" class="btn btn-primary-stroke">
+                        <span> {{ $dyn4->link }}</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                      </a>
                   </div>
-                  @endforeach
                         @endif
                   @if($dyn5)
-         @foreach ($dyn5 as $dyn5s)
                   <div class="col-12 col-md-6 chart-upper-block">
-                     <h3>{{ $dyn5s->title }}  </h3>
-                     <p>{{ $dyn5s->description }} </p>
-                     <a href="{{ $dyn5s->video_link }}" class="btn btn-primary-stroke">
-                        <span> {{ $dyn5s->link }}</span> 
+                     <h3>{{ $dyn5->title }}  </h3>
+                    {{ $dyn5->description }} 
+                     <a href="{{ $dyn5->video_link }}" class="btn btn-primary-stroke">
+                        <span> {{ $dyn5->link }}</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                      </a>
                   </div>
-                  @endforeach
                         @endif
                  </div>
             </div>
@@ -178,23 +168,21 @@
          <section class="service-chart">
              <div class="container">
              @if($dyn6)
-         @foreach ($dyn6 as $dyn6s)
                <div class="row align-items-center">
                   <div class="col-md-6"> 
-                     <img src="{{ $dyn6s->image }}" class="img-fluid w-75" alt="">
+                     <img src="{{ $dyn6->image }}" class="img-fluid w-75" alt="">
                   </div>
                   <div class="col-md-6">
-                     <h3>{{ $dyn6s->title }}</h3>
-                     <p>{{ $dyn6s->description }} </p>
-                     <a href="{{ $dyn6s->video_link }}" class="btn btn-primary-stroke">
-                        <span> {{ $dyn6s->link }}</span> 
+                     <h3>{{ $dyn6->title }}</h3>
+                     {{ $dyn6->description }}
+                     <a href="{{ $dyn6->video_link }}" class="btn btn-primary-stroke">
+                        <span> {{ $dyn6->link }}</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                      </a>
                   </div>
                </div>
-               @endforeach
                         @endif
              </div>
          </section>

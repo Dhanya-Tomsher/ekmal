@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Contact;
 use App\Models\Blog;
 use App\Models\Clients;
+use App\Models\Services;
+use App\Models\Course;
 use App\Models\Product\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,10 +29,14 @@ class DashboardController extends Controller
     {
         $countEnquiry = Contact::count();
         $countClients = Clients::count();
+        $countServices = Services::count();
+        $countCourses = Course::count();
 
         return view('admin.dashboard')->with([
             'countEnquiry' => $countEnquiry,
-            'countClients' => $countClients
+            'countClients' => $countClients,
+            'countServices' => $countServices,
+            'countCourses' => $countCourses
         ]);
     }
 
