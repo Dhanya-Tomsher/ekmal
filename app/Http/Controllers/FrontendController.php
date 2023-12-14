@@ -105,13 +105,13 @@ class FrontendController extends Controller
       //  $banners = HomeBanner::where('status',1)->orderBy('sort_order', 'ASC')->get();
      //   return view('frontend.home',compact('page','banners'));
         $sliders = Slider::find(1);
-        $dyn1 = Dynamiccontents::where('id', '=', 1)->get();
-        $dyn2 = Dynamiccontents::where('id', '=', 2)->get();
+        $dyn1 = Dynamiccontents::find(1);
+        $dyn2 = Dynamiccontents::find(2);
         $serv = Services::where('status', '=', 1)->get();
-        $dyn3 = Dynamiccontents::where('id', '=', 3)->get();
-        $dyn4 = Dynamiccontents::where('id', '=', 4)->get();
-        $dyn5 = Dynamiccontents::where('id', '=', 5)->get();
-        $dyn6 = Dynamiccontents::where('id', '=', 6)->get();
+        $dyn3 = Dynamiccontents::find(3);
+        $dyn4 = Dynamiccontents::find(4);
+        $dyn5 = Dynamiccontents::find(5);
+        $dyn6 = Dynamiccontents::find(6);
         $cou1 = Course::where('home_display_sort_order', '=', 1)->get();
         $cou2 = Course::where('home_display_sort_order', '=', 2)->get();
         $cou3 = Course::where('home_display_sort_order', '=', 3)->get();
@@ -144,7 +144,7 @@ class FrontendController extends Controller
         $usercourse->user_id        = $user->id;
         $usercourse->course_id      = $course->id;
         $usercourse->status         = 1;
-        $usercourse->save();
+        $usercourse->save(); 
         return view('frontend.account');
     }
     public function searchBlog(Request $request){

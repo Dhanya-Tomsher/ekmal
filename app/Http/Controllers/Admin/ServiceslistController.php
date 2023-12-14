@@ -47,24 +47,19 @@ class ServiceslistController extends Controller
     {
 
         $request->validate([
-            'image' => 'required|max:1024',
             'name' => 'required',
             'sort_order' => 'nullable|integer',
             'status' => 'required',
-        ],[
-            'image.uploaded' => 'File size should be less than 1 MB'
-        ]);
+        ],);
         $data = [
             'name'=> $request->name,
+            'description' => $request->description,
+            'position' => $request->position,
             'sort_order' => ($request->sort_order != '') ? $request->sort_order : 0,
             'status' => $request->status,
         ];
 
         $serviceslists = Serviceslist::create($data);
-
-        $image = uploadImage($request, 'image', 'serviceslists');
-
-        $serviceslists->image = $image;
         $serviceslists->save();
 
         return redirect()->route('admin.serviceslist.index')->with([
@@ -82,9 +77,9 @@ class ServiceslistController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Serviceslist $serviceslists)
+    public function edit(Serviceslist $serviceslist)
     {
-        return view('admin.serviceslist.edit', compact('serviceslists'));
+        return view('admin.serviceslist.edit', compact('serviceslist'));
     }
 
     /**
@@ -93,23 +88,17 @@ class ServiceslistController extends Controller
     public function update(Request $request, Serviceslist $serviceslists)
     {
         $request->validate([
-            'image' => 'nullable|max:1024',
             'name' => 'required',
             'sort_order' => 'nullable|integer',
             'status' => 'required',
-        ],[
-            'image.uploaded' => 'File size should be less than 1 MB'
-        ]);
+        ],);
 
         $serviceslists->name = $request->name;
+        $serviceslists->description = $request->description;
+        $serviceslists->position = $request->position;
         $serviceslists->sort_order = ($request->sort_order != '') ? $request->sort_order : 0;
         $serviceslists->status = $request->status;
 
-        if ($request->hasFile('image')) {
-            $image = uploadImage($request, 'image', 'serviceslists');
-            deleteImage($serviceslists->image);
-            $serviceslists->image = $image;
-        }
 
         $serviceslists->save();
 
@@ -123,10 +112,7 @@ class ServiceslistController extends Controller
      */
     public function destroy(Serviceslist $serviceslists)
     {
-        $img = $serviceslists->image;
-        if ($serviceslists->delete()) {
-            deleteImage($img);
-        }
+        
         return redirect()->route('admin.serviceslist.index')->with([
             'status' => "Serviceslist Deleted"
         ]);

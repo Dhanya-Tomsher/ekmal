@@ -31,8 +31,24 @@
                                 </a>
                             </div>
 
-                            
-                            
+                            <div class="col-lg-3">
+                                <a href="{{ route('admin.services.index') }}" class="card">
+                                    <div class="card-body text-center">
+                                        <i class="simple-icon-people"></i>
+                                        <p class="card-text mb-0">Services</p>
+                                        <p class="lead text-center">{{ $countServices }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="{{ route('admin.course.index') }}" class="card">
+                                    <div class="card-body text-center">
+                                        <i class="simple-icon-people"></i>
+                                        <p class="card-text mb-0">Courses</p>
+                                        <p class="lead text-center">{{ $countCourses }}</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

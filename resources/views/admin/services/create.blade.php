@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description</label>
-                                <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                                <input type="text" id="bannerEditor" name="description" class="form-control" value="{{ old('description') }}">
                                 <x-input-error name='description' />
                             </div>
                             <div class="form-group">
@@ -71,7 +71,14 @@
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="s1_position">Position</label>
-                                                                <input type="text" class="form-control" name="s1_position" placeholder="Enter Service content Position" value="{{ old('s1_position') }}">
+                                                                <select name="s1_position" class="form-control select2-single mb-3">
+                                                                <option value="1">
+                                                                    Top
+                                                                </option>
+                                                                <option value="2">
+                                                                    Bottom
+                                                                </option>
+                                                                </select>
                                                             </div> 
 
                                                             <div class="form-group col-sm-6">
@@ -136,7 +143,19 @@
     <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
     <script src="{{ adminAsset('js/jquery.repeater.min.js') }}"></script>
     <script src="{{ adminAsset('js/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#descEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
         $('#img').on('change', function() {
             if (this.files[0]) {
                 $('#imgname').text(this.files[0].name)
