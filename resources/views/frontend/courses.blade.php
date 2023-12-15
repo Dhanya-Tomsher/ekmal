@@ -31,7 +31,7 @@
                      <img src="{{ $cou1s->image }}" class="img-fluid" alt="">
                          <div class="course-warpper-content">
                          <a href="{{ route('course-details', ['slug' => $cou1s->slug]) }}"> <h4>{{ $cou1s->title }}</h4></a>
-                           <p>{{ $cou1s->description }}</p>
+                           {!! substr($cou1s->description, 0, 105) !!}...</p>
                          </div>
                   </div>
                </div>

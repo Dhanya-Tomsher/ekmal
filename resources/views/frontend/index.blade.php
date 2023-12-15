@@ -194,14 +194,14 @@
 
       <section class="online-courses">
          <div class="container">
-            <h3 class="featured-title mb-3">Online Courses</h3>
+            <h3 class="featured-title mb-3">Courses</h3>
             <div class="row g-2">
             @if($cou1)
          @foreach ($cou1 as $cou1s)
                <div class="col-md-8">
                   <div class="course-block course-block-1" style="background-image: url('{{ $cou1s->image }}');">
                      <h3 class="featured-title">{{ $cou1s->title }}</h3>
-                     <p class="featured-description">{{ $cou1s->description }}</p>
+                     <p class="featured-description">{!! substr($cou1s->description, 0, 205) !!}...</p>
                      <a href="{{ route('course-details', ['slug' => $cou1s->slug]) }}" class="btn btn-primary-fill mt-4">
                         <span> Free Case Evaluation</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -218,7 +218,7 @@
                   <div class="course-block course-block-2" style="background-image: url('{{ $cou2s->image }}');">
                      <h3 class="featured-title">{{ $cou2s->title }}
                      </h3>
-                     <p class="featured-description">{{ $cou2s->description }}</p>
+                     <p class="featured-description">{!! substr($cou2s->description, 0, 205) !!}...</p>
                      <a href="{{ route('course-details', ['slug' => $cou2s->slug]) }}" class="btn btn-primary-stroke mt-4">
                         <span> Free Case Evaluation</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -235,7 +235,7 @@
                   <div class="course-block course-block-3" style="background-image: url('{{ $cou3s->image }}');">
                      <h3 class="featured-title">{{ $cou3s->title }}
                      </h3>
-                     <p class="featured-description">{{ $cou3s->description }}</p>
+                     <p class="featured-description">{!! substr($cou3s->description, 0, 205) !!}...</p>
                      <a href="{{ route('course-details', ['slug' => $cou3s->slug]) }}" class="btn btn-primary-stroke mt-4">
                         <span> Free Case Evaluation</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -253,8 +253,8 @@
                      <h3 class="featured-title">{{ $cou4s->title }}
 
                      </h3>
-                     <p class="featured-description">{{ $cou4s->description }}</p>
-                     <a href="{{ route('course-details', ['slug' => $cou4s->id]) }}" class="btn btn-primary-stroke mt-4">
+                     <p class="featured-description">{!! substr($cou4s->description, 0, 205) !!}...</p>
+                     <a href="{{ route('course-details', ['slug' => $cou4s->slug]) }}" class="btn btn-primary-stroke mt-4">
                         <span> Free Case Evaluation</span> 
                         <svg width="31px" height="31px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -280,8 +280,10 @@
                      <img src="{{ $blogs->image }}" class="card-img-top" alt="...">
                      <div class="card-body">
                         <span class="card-date">{{ date('d M Y',strtotime($blogs->blog_date)) }}</span>
+                        <a href="{{ route('blog-details', ['slug' => $blogs->slug]) }}">
                         <h5 class="card-title">{{ $blogs->title }}</h5>
-                        <p class="card-text">{{ $blogs->description }}
+                        <p class="card-text">{!! substr($blogs->description, 0, 105) !!}...
+                        </a>
                         </p>
                      </div>
                   </div>

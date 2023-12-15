@@ -33,13 +33,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description</label>
-                                <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                                <input type="text" id="bannerEditor" name="description" class="form-control" value="{{ old('description') }}">
                                 <x-input-error name='description' />
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Amount</label>
                                 <input type="text" name="amount" class="form-control" value="{{ old('amount') }}">
                                 <x-input-error name='amount' />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Join Link</label>
+                                <input type="text" id="jbannerEditor" name="join_link" class="form-control" value="{{ old('join_link') }}">
+                                <x-input-error name='join_link' />
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Image <span class="text-info">(Please upload an image with size less than 200 KB and dimensions 150x45 pixels)</span></label>
@@ -63,7 +68,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Home Display Sort Order</label>
                                 <input type="number" name="home_display_sort_order" class="form-control"
-                                    value="{{ old('home_display_sort_order', $course->home_display_sort_order) }}">
+                                    value="{{ old('home_display_sort_order') }}">
                                 <x-input-error name='home_display_sort_order' />
                             </div>
                             <div class="form-group">
@@ -104,7 +109,19 @@
 @push('footer')
     <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
 
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#jbannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
         $('#img').on('change', function() {
             if (this.files[0]) {
                 $('#imgname').text(this.files[0].name)

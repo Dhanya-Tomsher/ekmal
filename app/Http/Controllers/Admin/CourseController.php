@@ -65,7 +65,8 @@ class CourseController extends Controller
             'slug'=> $cann,
             'title'=> $request->title,
             'description'=> $request->description,
-            'amount'=> $request->amount,
+            'amount'=> $request->amount,            
+            'join_link'=> $request->join_link,
             'keyword'=> $request->keyword,
             'sort_order' => ($request->sort_order != '') ? $request->sort_order : 0,
             'home_display_sort_order' => ($request->home_display_sort_order != '') ? $request->home_display_sort_order : 0,
@@ -119,7 +120,8 @@ class CourseController extends Controller
         $cann = preg_replace('/-+/', '-', $canonical_name);
         $course->slug = $cann;
         $course->category_id = $request->category_id;
-        $course->title = $request->title;
+        $course->title = $request->title;        
+        $course->join_link = $request->join_link;
         $course->description = $request->description;
         $course->amount = $request->amount;
         $course->keyword = $request->keyword;

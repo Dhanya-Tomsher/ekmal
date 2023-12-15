@@ -27,7 +27,8 @@ Route::post('/store-serviceenquiry', [FrontendController::class, 'storeServiceen
 Route::get('/course-apply/{slug}', [FrontendController::class, 'courseApply'])->name('course-apply');
 Route::post('/apply-course', [FrontendController::class, 'storeCourseApply'])->name('apply-course');
 
-
+Route::get('/careers-apply', [FrontendController::class, 'careersApply'])->name('careers-apply');
+Route::post('/store-career', [FrontendController::class, 'storeCareer'])->name('store-career');
 Route::get('/signup', [CustomAuthController::class, 'register'])->name('signup');
 Route::post('/store-register', [CustomAuthController::class, 'postRegister'])->name('store-register');
 Route::get('/signin', [CustomAuthController::class, 'index'])->name('signin');

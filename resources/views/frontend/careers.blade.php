@@ -61,7 +61,7 @@
                         <p>{{ $carrs->description }}</p>
                      </div>
                      <span>Last Date: {{ date('d M Y', strtotime($carrs->last_date)) }}</span>
-                     <a href="{{ route('careers.apply') }}" class="apply-btn">Apply Now</a>
+                     <a href="{{ route('careers-apply') }}" class="apply-btn">Apply Now</a>
                   </div>
                </div>
                @endforeach

@@ -11,7 +11,7 @@
                 @can('slider')
                     <li class="{{ request()->routeIs('admin.slider*') ? 'active' : '' }}">
                         <a href="{{ route('admin.slider.index') }}">
-                            <i class="simple-icon-people"></i> Slider
+                            <i class="iconsminds-photo"></i> Slider
                         </a>
                     </li>
                 @endcan
@@ -19,76 +19,76 @@
                 @can('services')
                     <li class="{{ request()->routeIs('admin.services*') ? 'active' : '' }}">
                         <a href="{{ route('admin.services.index') }}">
-                            <i class="simple-icon-people"></i> Services
+                            <i class="simple-icon-star"></i> Services
                         </a>
                     </li>
                 @endcan
                 @can('serviceslist')
                     <li class="{{ request()->routeIs('admin.serviceslist*') ? 'active' : '' }}">
                         <a href="{{ route('admin.serviceslist.index') }}">
-                            <i class="simple-icon-people"></i> Services List
+                            <i class="iconsminds-photo"></i> Services List
                         </a>
                     </li>
                 @endcan
                 @can('contactdetails')
                     <li class="{{ request()->routeIs('admin.contactdetails*') ? 'active' : '' }}">
                         <a href="{{ route('admin.contactdetails.index') }}">
-                            <i class="simple-icon-people"></i> Contact Address
+                            <i class="iconsminds-newspaper"></i> Contact Address
                         </a>
                     </li>
                 @endcan
                 @can('dynamiccontents')
                     <li class="{{ request()->routeIs('admin.dynamiccontents*') ? 'active' : '' }}">
                         <a href="{{ route('admin.dynamiccontents.index') }}">
-                            <i class="simple-icon-people"></i> Dynamic Contents
+                            <i class="iconsminds-diamond"></i> Dynamic Contents
                         </a>
                     </li>
                 @endcan
                 @can('banner')
                     <li class="{{ request()->routeIs('admin.banners*') ? 'active' : '' }}">
                         <a href="{{ route('admin.banners.index') }}">
-                            <i class="simple-icon-people"></i> Banners
+                            <i class="iconsminds-computer"></i> Banners
                         </a>
                     </li>
                 @endcan
                 @can('blogs')
                     <li class="{{ request()->routeIs('admin.blogs*') ? 'active' : '' }}">
                         <a href="{{ route('admin.blogs.index') }}">
-                            <i class="simple-icon-people"></i> Blogs
+                            <i class="simple-icon-lock-open"></i> Blogs
                         </a>
                     </li>
                 @endcan
                 @can('coursecategory')
                     <li class="{{ request()->routeIs('admin.coursecategory*') ? 'active' : '' }}">
                         <a href="{{ route('admin.coursecategory.index') }}">
-                            <i class="simple-icon-people"></i> Coursecategory
+                            <i class="simple-icon-lock-open"></i> Coursecategory
                         </a>
                     </li>
                 @endcan
                 @can('course')
                     <li class="{{ request()->routeIs('admin.course*') ? 'active' : '' }}">
                         <a href="{{ route('admin.course.index') }}">
-                            <i class="simple-icon-people"></i> Courses
+                            <i class="simple-icon-doc"></i> Courses
                         </a>
                     </li>
                 @endcan
                 @can('faq')
                     <li class="{{ request()->routeIs('admin.faq*') ? 'active' : '' }}">
                         <a href="{{ route('admin.faq.index') }}">
-                            <i class="simple-icon-people"></i> Faq
+                            <i class="simple-icon-question"></i> Faq
                         </a>
                     </li>
                 @endcan
                 @can('career')
                     <li class="{{ request()->routeIs('admin.careers*') ? 'active' : '' }}">
                         <a href="{{ route('admin.careers.index') }}">
-                            <i class="simple-icon-people"></i> Careers
+                            <i class="simple-icon-wrench"></i> Careers
                         </a>
                     </li>
                 @endcan
                 @can('careerapplication')
                     <li class="{{ request()->routeIs('admin.careerapplication*') ? 'active' : '' }}">
-                        <a href="#">
+                        <a href="{{ route('admin.careersapplication') }}">
                             <i class="simple-icon-people"></i> Careerapplication
                         </a>
                     </li>
@@ -99,15 +99,15 @@
                             <i class="simple-icon-people"></i> Users
                         </a>
                     </li>
-                @endcan
+                @endcan-->
                 @can('usercourses')
                     <li class="{{ request()->routeIs('admin.usercourses*') ? 'active' : '' }}">
-                        <a href="#">
+                        <a href="{{ route('admin.usercourses') }}">
                             <i class="simple-icon-people"></i> Usercourses
                         </a>
                     </li>
                 @endcan
-               @can('generalsettings')
+               <!-- @can('generalsettings')
                     <li class="{{ request()->routeIs('admin.generalsettings*') ? 'active' : '' }}">
                     <a href="{{ route('admin.generalsettings.index') }}">
                             <i class="simple-icon-settings"></i> Page Settings

@@ -62,7 +62,8 @@
                          <img src="{{ $blogs->image }}" class="img-fluid" alt="">
                          <div class="insights-content-block">
                            <h4>{{ $blogs->title }}</h4>
-                           <p>{{ date('d M Y', strtotime($blogs->blog_date)) }} — {{ $blogs->description }}</p>
+                           <p>{{ date('d M Y', strtotime($blogs->blog_date)) }} </p>
+                           {!! substr($blogs->description, 0, 105) !!}...</p>
                            <a href="{{ route('blog-details', ['slug' => $blogs->slug]) }}">Read More</a>
                          </div>
                   </div>

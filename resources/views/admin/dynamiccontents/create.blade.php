@@ -30,7 +30,7 @@
                                 <label for="exampleInputEmail1">Description</label>
                                 <input type="text" id="bannerEditor" name="description" class="form-control" value="{{ old('description') }}">
                                 <x-input-error name='description' />
-                            </div>
+                            </div> 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Video Link</label>
                                 <input type="text" name="videolink" class="form-control" value="{{ old('video_link') }}">

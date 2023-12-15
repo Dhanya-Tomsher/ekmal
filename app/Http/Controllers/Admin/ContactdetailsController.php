@@ -45,9 +45,10 @@ class ContactdetailsController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required|integer',
             'sort_order' => 'nullable|integer',
             'status' => 'required',
         ],);

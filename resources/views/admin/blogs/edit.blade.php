@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Description</label>
-                                <input type="text" name="description" class="form-control"
+                                <input type="text" id="bannerEditor" name="description" class="form-control"
                                     value="{{ old('name', $blog->description) }}" required>
                                 <x-input-error name='description' />
                             </div>
@@ -108,7 +108,19 @@
 <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
     <script src="{{ adminAsset('js/jquery.repeater.min.js') }}"></script>
     <script src="{{ adminAsset('js/jquery/jquery.validate.min.js') }}"></script>
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#descEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
 
 $('#img').on('change', function() {
             if (this.files[0]) {

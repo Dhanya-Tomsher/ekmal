@@ -31,7 +31,7 @@
                                         <th scope="col" class="text-center">Sl No.</th>
                                         <th scope="col">Page</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col" class="text-center">Image</th>
+                                        <!-- <th scope="col" class="text-center">Image</th> -->
                                         <!-- <th scope="col" class="text-center">Sort Order</th> -->
                                         <th scope="col" class="text-center">Status</th>
                                         <th scope="col" class="text-center">Action</th>
@@ -44,9 +44,9 @@
                                                 <td class="text-center">{{ $key + 1 + ($dynamiccontents->currentPage() - 1) * $dynamiccontents->perPage() }}</td>
                                                 <td>{{ $dynamiccontent->page }}</td>
                                                 <td>{{ $dynamiccontent->title }}</td>
-                                                <td class="text-center">
+                                                <!-- <td class="text-center">
                                                     <img class="client-image" src="{{ $dynamiccontent->getImage() }}" alt="">
-                                                </td>
+                                                </td> -->
                                                 <td class="text-center">
                                                     <b>{!! $dynamiccontent->status == 1 ? '<span class="text-success">Enabled</span>' : '<span class="text-danger">Disabled</span>' !!}</b>
                                                 </td>

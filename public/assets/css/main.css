@@ -23300,3 +23300,27 @@ button.swiper-pagination-bullet {
   color:#fff;
 }
 /*# sourceMappingURL=main.css.map */
+section.news-section .card .card-body .card-title {
+  color:#000 !important;
+}
+section.news-section .card .card-text {
+  color:#000 !important;
+}
+section.news-section .card .card-body p a {
+  color:#000 !important;
+}
+section.news-section .card .card-body p a {
+  color:#000 !important;
+}
+section.online-courses .course-block .course-block-3 p{
+  color:#fff !important;
+}
+section.online-courses .course-block .course-block-4 p{
+  color:#fff !important;
+}
+section.online-courses .course-block.course-block-1 p{
+  color:#fff !important;
+}
+section.online-courses .course-block.course-block-2 p{
+  color:#fff !important;
+}
