@@ -1,13 +1,9 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Users Joined Course'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Careerapplications'])
 @section('content')
-<?php
-use App\Models\User;
-use App\Models\Course;
-?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1>Users Joined Course</h1>
+                <h1>All Careerapplications</h1>
                 
                 <div class="separator mb-5"></div>
             </div>
@@ -29,30 +25,22 @@ use App\Models\Course;
                                 <thead>
                                     <tr>
                                         <th scope="col">Sl No:</th>
-                                        <th scope="col">User</th>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Payment Status</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col" class="w-40">Message</th>
                                         <th scope="col">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if(isset($contact[0]))
                                         @foreach ($contact as $key=>$con)
-                                        <?php
-                                            $user = User::find($con->user_id)->name;
-                                            $course = Course::find($con->course_id)->title;
-                                            $pay = $con->payment_status;
-                                            if($pay == 1){
-                                                $paid = "Paid";
-                                            }else{
-                                                $paid = "Not Paid";
-                                            }
-                                        ?>
                                             <tr>
                                                 <td scope="row">{{ $key + 1 + ($contact->currentPage() - 1) * $contact->perPage() }}</td>
-                                                <td>{{ $user }}</td>
-                                                <td>{{ $course }}</td>
-                                                <td>{{ $paid }}</td>
+                                                <td>{{ $con->name }}</td>
+                                                <td>{{ $con->email }}</td>
+                                                <td>{{ $con->phone_number }}</td>
+                                                <td>{{ $con->description }}</td>
                                                 <td>{{ date('d M,Y', strtotime($con->created_at)) }}</td>
                                             </tr>
                                         @endforeach

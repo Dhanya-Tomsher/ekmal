@@ -103,7 +103,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 mb-10">
-                                                        <input data-repeater-create class="btn btn-primary" type="button" value="Add New List"  style="background-color: #5f63f2 !important;border-color: #5f63f2;"/>
+                                                        <input data-repeater-create class="btn btn-primary" type="button" value="Add New List"  style="background-color: #5f63f2 !important;border-color: #5f63f2; margin-bottom:20px;"/>
                                                     </div>
                                                 <!-- </div> -->
 

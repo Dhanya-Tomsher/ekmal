@@ -41,8 +41,8 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12" id="formDiv">
-               @if ($message = Session::get('status'))
-               <div class="col-12 mt-4">
+               @if ($message = Session::get('error'))
+                                <div class="col-12 mt-4">
                                     <div class="col-12">
                                         <div
                                             class="items-center justify-between bg-error-1 pl-30 pr-20 py-30 rounded-8">
@@ -52,10 +52,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                        @endif
+                            @endif
+                            
+                            @if ($message = Session::get('status'))
+                                <div class="col-12 mt-4">
+                                    <div class="col-12">
+                                        <div
+                                            class="items-center justify-between bg-success-1 pl-30 pr-20 py-30 rounded-8">
+                                            <div class="text-info-2 lh-14 fw-300">
+                                                <x-status />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                   <div class="form-warpper">
-                     <h3 class="innerpage-banner-title text-white mb-4">Send a message</h3>
-                     <form name="frm" method="POST" action="{{ route('store-contact') }}">
+                     <h3 class="innerpage-banner-title text-white mb-4">Apply Now</h3>
+                     <form name="frm" method="POST" action="{{ route('store-career') }}" enctype="multipart/form-data">
                      @csrf
                         <div class="row g-3">
                            <div class="col-md-6">
@@ -68,10 +81,13 @@
                               <input type="text" required name="phone" class="form-control" placeholder="Phone Number" aria-label="Phone Number (optional)">
                             </div>
                             <div class="col-md-6">
-                              <input type="text" name="subject" class="form-control" placeholder="Subject" aria-label="Subject">
+                              <textarea class="form-control" required name="description" id="exampleFormControlTextarea1" placeholder="Description" rows="3"></textarea>
                             </div>
                             <div class="col-md-12">
-                              <textarea class="form-control" required name="message" id="exampleFormControlTextarea1" placeholder="Your Message / Inquiry / Request" rows="3"></textarea>
+                            <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Upload CV* (Please upload PDF file with size less than 500 KB)</label>
+                            
+                                            <input class="form-control" type="file" name="resume" accept=".pdf" id="resume" placeholder="cv.pdf">
+                            
                             </div>
                             <div class="col-md-12">
                             <button type="submit" class="btn btn-primary-stroke">
@@ -83,40 +99,15 @@
                             </div>
                          </div>
                      </form>
+
+                     
                   </div>
 
                </div>
             </div>
          </div>
       </section>
-      <section class="contact-address">
-         <div class="container">
-            <div class="row g-3">
-            @if($contact)
-         @foreach ($contact as $contacts)
-               <div class="col-md-4"> 
-                  <div class="address-detail-block">
-                     <h4>{{ $contacts->name }}</h4>                    
-                     <ul>
-                        <li>
-                           <i class="bi bi-telephone"></i> <a href="tel:{{ $contacts->phone }}">{{ $contacts->phone }}</a>
-                        </li>
-                        <li>
-                           <i class="bi bi-envelope-at"></i>
-                           <a href="mailto:{{ $contacts->email }}">{{ $contacts->email }}</p></a>
-                        </li>
-                        <li>
-                           <i class="bi bi-map"></i>
-                           {!! $contacts->address !!}
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               @endforeach
-                @endif       
-            </div>
-         </div>
-      </section>
+      
 @endsection
 @push('footer')
 <script>

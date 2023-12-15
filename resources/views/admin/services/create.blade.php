@@ -61,17 +61,17 @@
                                                         <div data-repeater-item class="row">
                                                             <div class="form-group col-sm-6">
                                                                 <label for="s1_name">Title</label>
-                                                                <input type="text" class="form-control"  name="s1_name" placeholder="Enter Service content Title" value="{{ old('s1_title') }}">
+                                                                <input type="text" required class="form-control"  name="s1_name" placeholder="Enter Service content Title" value="{{ old('s1_title') }}">
                                                             </div>
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="s1_description">Description</label>
-                                                                <input type="text" class="form-control" name="s1_description" placeholder="Enter Service content Description" value="{{ old('s1_content') }}">
+                                                                <input type="text" required class="form-control" name="s1_description" placeholder="Enter Service content Description" value="{{ old('s1_content') }}">
                                                             </div>
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="s1_position">Position</label>
-                                                                <select name="s1_position" class="form-control select2-single mb-3">
+                                                                <select name="s1_position" required class="form-control select2-single mb-3">
                                                                 <option value="1">
                                                                     Top
                                                                 </option>
@@ -83,7 +83,7 @@
 
                                                             <div class="form-group col-sm-6">
                                                                 <label for="s1_sort_order">Sort Order</label>
-                                                                <input type="text" class="form-control" name="s1_sort_order" placeholder="Enter Service content Sort Order" value="{{ old('s1_sort_order') }}">
+                                                                <input type="text" required class="form-control" name="s1_sort_order" placeholder="Enter Service content Sort Order" value="{{ old('s1_sort_order') }}">
                                                             </div> 
 
                                                             <div class="text-right col-sm-12 d-block">

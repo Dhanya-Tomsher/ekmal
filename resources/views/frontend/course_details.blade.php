@@ -15,7 +15,7 @@
         <div class="container course-description-top-margin">
             <div class="course-detailed-content">
                 <h3>Description</h3>
-                <p class="my-3">{{ $course->description }}</p>
+                <p class="my-3">{!! $course->description !!}</p>
             </div>
             @if(Auth()->user())
             <a href="{{ route('course-apply', ['slug' => $course->slug]) }}" class="btn btn-primary-stroke mt-4">                

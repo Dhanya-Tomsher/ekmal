@@ -43,7 +43,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Address</label>
-                                <input type="text" name="address" class="form-control"
+                                <input id="bannerEditor" type="text" name="address" class="form-control"
                                     value="{{ old('address', $contactdetail->address) }}" required>
                                 <x-input-error name='address' />
                             </div>
@@ -97,7 +97,19 @@
 @push('footer')
     <script src="{{ adminAsset('js/vendor/select2.full.js') }}"></script>
 
+    <script src="{{ adminAsset('js/tinymce/tinymce.min.js') }}"></script>
     <script>
+        tinymce.init({
+            selector: '#bannerEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
+
+        tinymce.init({
+            selector: '#descEditor',
+            plugins: "autosave",
+            autosave_ask_before_unload: false
+        });
         $('#img').on('change', function() {
             if (this.files[0]) {
                 $('#imgname').text(this.files[0].name)

@@ -116,15 +116,15 @@ class FrontendController extends Controller
         $cou2 = Course::where('home_display_sort_order', '=', 2)->get();
         $cou3 = Course::where('home_display_sort_order', '=', 3)->get();
         $cou4 = Course::where('home_display_sort_order', '=', 4)->get();
-        $blog = Blogs::where('status', '=', 1)->get();
-        $allc = Course::where('status', '=', 1)->get();
-        $faq = Faq::where('status', '=', 1)->get();
+        $blog = Blogs::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
+        $allc = Course::where('status', '=', 1)->limit(2)->get();
+        $faq = Faq::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
         return view('frontend.index',compact('sliders','dyn1','dyn2','serv','dyn3','dyn4','dyn5','dyn6','cou1','cou2','cou3','cou4','blog','allc','faq'));  
     }
     public function courses()
     {
         $banner = Banners::find(4);
-        $cou1 = Course::where('status', '=', 1)->get();
+        $cou1 = Course::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
         $dyn8 = Dynamiccontents::find(8);
         $dyn9 = Dynamiccontents::find(9);
         return view('frontend.courses',compact('banner','cou1','dyn8','dyn9'));   
@@ -197,10 +197,50 @@ class FrontendController extends Controller
         $carr = Careers::where('status', '=', 1)->get();
         return view('frontend.careers',compact('banner','dyn10','dyn11','carr','dyn12')); 
     }
+    public function careersApply()
+    {$banner = Banners::find(5);
+        return view('frontend.careers-apply',compact('banner')); 
+    }
+    public function storeCareer(Request $request){
+      /*  $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            'description' => 'required',
+            'resume' => 'required|max:500'
+        ],[
+            '*.required' => 'This field is required.',
+            'resume.max' => "Maximum file size to upload is 500 KB.",
+        ]);
+        if ($validator->fails()) {
+            return redirect(url()->previous() .'#job-application')->withErrors($validator)->withInput()->with([
+                'error' => "Please check the error messages"
+            ]);
+        }
+*/
+        $con = new CareerApplications;
+        $con->name = $request->name;
+        $con->email = $request->email;
+        $con->phone_number = $request->phone;
+        $con->description = $request->description;
+        
+        if ($request->hasFile('resume')) {
+            $resume = uploadImage($request, 'resume', 'resume');
+            $con->resume = $resume;
+        }
+        $con->save();
+      //  $filePath = public_path($resume);
+
+        //Mail::to(env('MAIL_ADMIN'))->queue(new CareerEnquiry($con,$filePath));
+
+        return redirect(url()->previous() .'#job-application')->with([
+            'status' => "Thank you for getting in touch. Our team will contact you shortly."
+        ]);
+   }
     public function faq()
     {
         $banner = Banners::find(7);
-        $faq = Faq::where('status', '=', 1)->get();
+        $faq = Faq::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
         return view('frontend.faq',compact('banner','faq'));
     }
     public function terms()
@@ -222,8 +262,8 @@ class FrontendController extends Controller
         $dyn6 = Dynamiccontents::find(6);
         $dyn7 = Dynamiccontents::find(7);
         $banner = Banners::where('page', 'insights')->get();
-        $faq = Faq::where('status', '=', 1)->get();
-        $blog = Blogs::where('status', '=', 1)->get();
+        $faq = Faq::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
+        $blog = Blogs::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get();
         return view('frontend.blogs',compact('banner','faq','blog','dyn4','dyn5','dyn6','dyn7')); 
     }
     public function blogDetails(Request $request)
@@ -264,7 +304,7 @@ class FrontendController extends Controller
     public function services()
     {
         $slider = Slider::find(3);
-        $serv = Services::where('status', '=', 1)->get();
+        $serv = Services::where('status', '=', 1)->orderBy('sort_order', 'ASC')->get(); 
         $dyn9 = Dynamiccontents::find(9);        
         return view('frontend.services', compact('slider','serv','dyn9'));
     }

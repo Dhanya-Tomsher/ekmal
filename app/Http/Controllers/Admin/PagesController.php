@@ -10,6 +10,8 @@ use App\Models\GeneralSettings;
 use App\Models\HeritageLists;
 use App\Models\Contact;
 use App\Models\Address;
+use App\Models\CareerApplications;
+use App\Models\Usercourses;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Str;
@@ -22,7 +24,7 @@ class PagesController extends Controller
     public function __construct()
     {
         $this->middleware('permission:enquiries', ['only' => ['enquiries']]);
-
+        $this->middleware('permission:careersapplication', ['only' => ['careersapplication']]);
         $this->middleware('permission:general_settings', ['only' => ['generalSettings']]);
         $this->middleware(function ($request, $next) {
             if(Auth()->user()->user_type === 1){
@@ -70,5 +72,17 @@ class PagesController extends Controller
         $contact = $query->paginate(10);
 
         return view('admin.contact.index', compact('contact'));
+    }
+    public function careersapplication(){
+        $query = CareerApplications::latest();
+        $contact = $query->paginate(10);
+
+        return view('admin.careerapplications.index', compact('contact'));
+    }
+    public function usercourses(){
+        $query = Usercourses::latest();
+        $contact = $query->paginate(10);
+
+        return view('admin.usercourses.index', compact('contact'));
     }
 }
